@@ -25,10 +25,15 @@
 package com.robocat.android.rc.services;
 
 /**
- * Created by douglas on 25/11/14.
+ * Created by douglas on 2014-11-25.
+ * Extended by jack on 2023-02-10.
  */
 public enum BluetoothStatus {
-    CONNECTED,
+    NOT_SUPPORTED,
+    OFF,
+    REQUIRES_PERMISSION,
+    ON,
+    SEARCHING,
     CONNECTING,
-    NONE
+    CONNECTED
 }

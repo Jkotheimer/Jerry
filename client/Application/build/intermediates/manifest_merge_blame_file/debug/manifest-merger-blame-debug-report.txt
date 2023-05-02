@@ -17,12 +17,12 @@
 17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 18    package="com.robocat.android.rc"
 19    android:versionCode="1"
-20    android:versionName="1.0" >
+20    android:versionName="1.1" >
 21
 22    <uses-sdk
-23        android:minSdkVersion="18"
+23        android:minSdkVersion="31"
 23-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml
-24        android:targetSdkVersion="28" />
+24        android:targetSdkVersion="33" />
 24-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml
 25
 26    <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
@@ -35,61 +35,125 @@
 33    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE)
 34    -->
 35    <uses-feature
-35-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:31:5-86
+35-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:32:5-86
 36        android:name="android.hardware.bluetooth"
-36-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:31:19-60
+36-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:32:19-60
 37        android:required="true" />
-37-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:31:61-84
+37-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:32:61-84
 38
 39    <uses-permission android:name="android.permission.BLUETOOTH" />
-39-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:33:5-67
-39-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:33:22-65
-40    <!-- uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/ -->
-41    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-41-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:35:5-80
-41-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:35:22-78
-42    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-42-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:36:5-78
-42-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:36:22-76
-43
-44    <application
-44-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:38:5-51:19
-45        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-45-->[com.android.support:support-compat:28.0.0] /home/jack/.gradle/caches/transforms-3/ecbd23666767c8ec76a81939f74c71e4/transformed/support-compat-28.0.0/AndroidManifest.xml:22:18-91
-46        android:debuggable="true"
-47        android:icon="@drawable/ic_launcher"
-47-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:40:9-45
-48        android:label="@string/app_name"
-48-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:39:9-41
-49        android:theme="@android:style/Theme.DeviceDefault" >
-49-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:41:9-59
-50        <activity
-50-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:43:9-48:20
-51            android:name="com.robocat.android.rc.DeviceScanActivity"
-51-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:43:19-53
-52            android:exported="true" >
-52-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:43:54-77
-53            <intent-filter>
-53-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:44:13-47:29
-54                <action android:name="android.intent.action.MAIN" />
-54-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:45:17-68
-54-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:45:25-66
-55
-56                <category android:name="android.intent.category.LAUNCHER" />
-56-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:46:17-76
-56-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:46:27-74
-57            </intent-filter>
-58        </activity>
-59        <activity android:name="com.robocat.android.rc.DeviceControlActivity" />
-59-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:49:9-58
-59-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:49:19-56
-60
-61        <service
-61-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:50:9-77
-62            android:name="com.robocat.android.rc.BluetoothLeService"
-62-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:50:18-52
-63            android:enabled="true" />
-63-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:50:53-75
-64    </application>
-65
-66</manifest>
+39-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:34:5-104
+39-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:34:22-65
+40    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+40-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:35:5-110
+40-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:35:22-71
+41    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+41-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:36:5-109
+41-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:36:22-70
+42    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+42-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:37:5-112
+42-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:37:22-73
+43    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+43-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:38:5-117
+43-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:38:22-78
+44    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+44-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:39:5-115
+44-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:39:22-76
+45
+46    <permission
+46-->[androidx.core:core:1.9.0] /home/jack/.gradle/caches/transforms-3/9811bf6e0ea8002748e1a5d1e9eb40bd/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+47        android:name="com.robocat.android.rc.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+47-->[androidx.core:core:1.9.0] /home/jack/.gradle/caches/transforms-3/9811bf6e0ea8002748e1a5d1e9eb40bd/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+48        android:protectionLevel="signature" />
+48-->[androidx.core:core:1.9.0] /home/jack/.gradle/caches/transforms-3/9811bf6e0ea8002748e1a5d1e9eb40bd/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+49
+50    <uses-permission android:name="com.robocat.android.rc.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+50-->[androidx.core:core:1.9.0] /home/jack/.gradle/caches/transforms-3/9811bf6e0ea8002748e1a5d1e9eb40bd/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+50-->[androidx.core:core:1.9.0] /home/jack/.gradle/caches/transforms-3/9811bf6e0ea8002748e1a5d1e9eb40bd/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+51
+52    <application
+52-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:42:5-60:19
+53        android:name="com.robocat.android.rc.MainApplication"
+53-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:45:9-62
+54        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+54-->[androidx.core:core:1.9.0] /home/jack/.gradle/caches/transforms-3/9811bf6e0ea8002748e1a5d1e9eb40bd/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+55        android:debuggable="true"
+56        android:extractNativeLibs="false"
+57        android:icon="@drawable/ic_launcher"
+57-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:44:9-45
+58        android:label="@string/app_name"
+58-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:43:9-41
+59        android:testOnly="true"
+60        android:theme="@android:style/Theme.DeviceDefault" >
+60-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:46:9-59
+61        <activity
+61-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:48:9-53:20
+62            android:name="com.robocat.android.rc.activities.StartupActivity"
+62-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:48:19-61
+63            android:exported="true" >
+63-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:48:62-85
+64            <intent-filter>
+64-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:49:13-52:29
+65                <action android:name="android.intent.action.MAIN" />
+65-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:50:17-68
+65-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:50:25-66
+66
+67                <category android:name="android.intent.category.LAUNCHER" />
+67-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:51:17-76
+67-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:51:27-74
+68            </intent-filter>
+69        </activity>
+70        <activity android:name="com.robocat.android.rc.activities.DeviceScanActivity" />
+70-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:54:9-66
+70-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:54:19-64
+71        <activity android:name="com.robocat.android.rc.activities.base.BluetoothActivity" />
+71-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:55:9-70
+71-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:55:19-68
+72        <activity android:name="com.robocat.android.rc.activities.DeviceSetupActivity" />
+72-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:56:9-67
+72-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:56:19-65
+73        <activity android:name="com.robocat.android.rc.activities.HomepageActivity" />
+73-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:57:9-64
+73-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:57:19-62
+74
+75        <service
+75-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:59:9-125
+76            android:name="com.robocat.android.rc.services.BluetoothService"
+76-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:59:18-59
+77            android:enabled="true"
+77-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:59:101-123
+78            android:foregroundServiceType="location" />
+78-->/home/jack/Projects/WiFi_RC/client/Application/src/main/AndroidManifest.xml:59:60-100
+79        <service
+79-->[androidx.room:room-runtime:2.5.0] /home/jack/.gradle/caches/transforms-3/20def261a87cf9158cb2c39e2f9cfe88/transformed/room-runtime-2.5.0/AndroidManifest.xml:24:9-28:63
+80            android:name="androidx.room.MultiInstanceInvalidationService"
+80-->[androidx.room:room-runtime:2.5.0] /home/jack/.gradle/caches/transforms-3/20def261a87cf9158cb2c39e2f9cfe88/transformed/room-runtime-2.5.0/AndroidManifest.xml:25:13-74
+81            android:directBootAware="true"
+81-->[androidx.room:room-runtime:2.5.0] /home/jack/.gradle/caches/transforms-3/20def261a87cf9158cb2c39e2f9cfe88/transformed/room-runtime-2.5.0/AndroidManifest.xml:26:13-43
+82            android:exported="false" />
+82-->[androidx.room:room-runtime:2.5.0] /home/jack/.gradle/caches/transforms-3/20def261a87cf9158cb2c39e2f9cfe88/transformed/room-runtime-2.5.0/AndroidManifest.xml:27:13-37
+83
+84        <provider
+84-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+85            android:name="androidx.startup.InitializationProvider"
+85-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+86            android:authorities="com.robocat.android.rc.androidx-startup"
+86-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+87            android:exported="false" >
+87-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+88            <meta-data
+88-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+89                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+89-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+90                android:value="androidx.startup" />
+90-->[androidx.emoji2:emoji2:1.2.0] /home/jack/.gradle/caches/transforms-3/1f2ec24e04aa7670dbdd4e904437e8bf/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+91            <meta-data
+91-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/jack/.gradle/caches/transforms-3/2843dd8f352d29054991aa53179df82d/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+92                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+92-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/jack/.gradle/caches/transforms-3/2843dd8f352d29054991aa53179df82d/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+93                android:value="androidx.startup" />
+93-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/jack/.gradle/caches/transforms-3/2843dd8f352d29054991aa53179df82d/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+94        </provider>
+95    </application>
+96
+97</manifest>

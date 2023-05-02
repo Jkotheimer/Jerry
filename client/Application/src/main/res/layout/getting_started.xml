@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.DeviceSetupActivity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <Button
+        android:id="@+id/get_started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/margin_huge"
+        android:paddingVertical="@dimen/margin_large"
+        android:text="@string/get_started_button_label"
+        android:onClick="onClickGetStarted"
+        />
+</LinearLayout>

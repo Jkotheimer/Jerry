@@ -17,11 +17,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.robocat.android.rc"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.1" >
 
     <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="28" />
+        android:minSdkVersion="31"
+        android:targetSdkVersion="33" />
 
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
 
@@ -37,18 +37,29 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <!-- uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/ -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <permission
+        android:name="com.robocat.android.rc.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.robocat.android.rc.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
     <application
-        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+        android:name="com.robocat.android.rc.MainApplication"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
+        android:extractNativeLibs="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:testOnly="true"
         android:theme="@android:style/Theme.DeviceDefault" >
         <activity
-            android:name="com.robocat.android.rc.DeviceScanActivity"
+            android:name="com.robocat.android.rc.activities.StartupActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,11 +67,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.robocat.android.rc.DeviceControlActivity" />
+        <activity android:name="com.robocat.android.rc.activities.DeviceScanActivity" />
+        <activity android:name="com.robocat.android.rc.activities.base.BluetoothActivity" />
+        <activity android:name="com.robocat.android.rc.activities.DeviceSetupActivity" />
+        <activity android:name="com.robocat.android.rc.activities.HomepageActivity" />
 
         <service
-            android:name="com.robocat.android.rc.BluetoothLeService"
-            android:enabled="true" />
+            android:name="com.robocat.android.rc.services.BluetoothService"
+            android:enabled="true"
+            android:foregroundServiceType="location" />
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:directBootAware="true"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="com.robocat.android.rc.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 
 </manifest>

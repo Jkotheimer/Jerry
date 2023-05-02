@@ -24,36 +24,62 @@
 
 package com.robocat.android.rc.services;
 
+import android.Manifest;
+import android.app.Service;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Binder;
 import android.os.Handler;
+
+import android.os.IBinder;
 import android.util.Log;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by douglas on 23/03/15.
  * Extended by jack on 04/02/23.
  */
-public abstract class BluetoothService {
+public abstract class BluetoothService extends Service {
     // Debugging
     private static final String TAG = BluetoothService.class.getSimpleName();
     protected static final boolean D = true;
 
-    protected static BluetoothService defaultServiceInstance;
-    protected BluetoothConfiguration config;
-    protected BluetoothStatus status;
+    public static final String EXTRA_CONFIG = "EXTRA_CONFIG";
 
-    private final Handler handler;
+    public static final String[] PERMISSIONS = new String[] {
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+    protected static BluetoothService mDefaultServiceInstance;
+    protected BluetoothConfiguration mConfig;
+    protected BluetoothStatus mStatus;
+
+    private final Handler mHandler;
 
     protected OnBluetoothEventCallback onEventCallback;
 
-    protected OnBluetoothScanCallback onScanCallback;
+    protected OnBluetoothScanCallback mOnScanCallback;
+
+    public BluetoothService() {
+        mConfig = new BluetoothConfiguration();
+        mStatus = BluetoothStatus.NOT_SUPPORTED;
+        mHandler = new Handler();
+    }
 
     protected BluetoothService(BluetoothConfiguration config) {
-        this.config = config;
-        this.status = BluetoothStatus.NONE;
-        this.handler = new Handler();
+        mConfig = config;
+        mStatus = BluetoothStatus.NOT_SUPPORTED;
+        mHandler = new Handler();
     }
 
     /**
@@ -61,15 +87,14 @@ public abstract class BluetoothService {
      * @param config The configuration to use for all future services.
      */
     public static void init(BluetoothConfiguration config) {
-        if (defaultServiceInstance != null) {
-            defaultServiceInstance.stopService();
-            defaultServiceInstance = null;
+        if (mDefaultServiceInstance != null) {
+            mDefaultServiceInstance.stopService();
+            mDefaultServiceInstance = null;
         }
         try {
-            Constructor<? extends BluetoothService> constructor =
-                    (Constructor<? extends BluetoothService>) config.bluetoothServiceClass.getDeclaredConstructors()[0];
+            Constructor<? extends BluetoothService> constructor = (Constructor<? extends BluetoothService>) config.bluetoothServiceClass.getDeclaredConstructors()[0];
             constructor.setAccessible(true);
-            defaultServiceInstance = constructor.newInstance(config);
+            mDefaultServiceInstance = constructor.newInstance(config);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {
@@ -79,49 +104,62 @@ public abstract class BluetoothService {
         }
     }
 
+    private final Binder mServiceBinder = new Binder() {
+        public BluetoothService getService() {
+            return mDefaultServiceInstance;
+        }
+    };
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        mConfig = (BluetoothConfiguration) intent.getParcelableExtra(EXTRA_CONFIG);
+        return mServiceBinder;
+    }
+
     /**
      * Get the BluetoothService singleton instance.
      * @return {@link BluetoothService}
      */
     public synchronized static BluetoothService getDefaultInstance() {
-        if (defaultServiceInstance == null) {
+        if (mDefaultServiceInstance == null) {
             throw new IllegalStateException("BluetoothService is not initialized. Call BluetoothService.init(config).");
         }
-        return defaultServiceInstance;
+        return mDefaultServiceInstance;
     }
 
     public void setOnEventCallback(OnBluetoothEventCallback onEventCallback) {
         this.onEventCallback = onEventCallback;
     }
 
-    public void setOnScanCallback(OnBluetoothScanCallback onScanCallback) {
-        this.onScanCallback = onScanCallback;
+    public void setOnScanCallback(OnBluetoothScanCallback mOnScanCallback) {
+        this.mOnScanCallback = mOnScanCallback;
     }
 
     public BluetoothConfiguration getConfiguration() {
-        return config;
+        return mConfig;
     }
 
     protected synchronized void updateState(final BluetoothStatus status) {
-        Log.v(TAG, "updateStatus() " + this.status + " -> " + status);
-        this.status = status;
+        Log.v(TAG, "updateStatus() " + mStatus + " -> " + status);
+        mStatus = status;
 
         // Give the new state to the Handler so the UI Activity can update
-        if (onEventCallback != null)
+        if (onEventCallback != null) {
             runOnMainThread(new Runnable() {
                 @Override
                 public void run() {
                     onEventCallback.onStatusChange(status);
                 }
             });
+        }
     }
 
     protected void runOnMainThread(final Runnable runnable, final long delayMillis) {
-        if (config.callListenersInMainThread) {
+        if (mConfig.callListenersInMainThread) {
             if (delayMillis > 0) {
-                handler.postDelayed(runnable, delayMillis);
+                mHandler.postDelayed(runnable, delayMillis);
             } else {
-                handler.post(runnable);
+                mHandler.post(runnable);
             }
         } else {
             if (delayMillis > 0) {
@@ -147,7 +185,7 @@ public abstract class BluetoothService {
     }
 
     protected void removeRunnableFromHandler(Runnable runnable) {
-        handler.removeCallbacks(runnable);
+        mHandler.removeCallbacks(runnable);
     }
 
     /**
@@ -155,8 +193,16 @@ public abstract class BluetoothService {
      * @return BluetoothStatus
      */
     public synchronized BluetoothStatus getStatus() {
-        return status;
+        return mStatus;
     }
+
+    /**
+     * Get all devices that are bonded with the bluetooth adapter.
+     * @return List<BluetoothDevice>
+     */
+    public abstract Set<BluetoothDevice> getBondedDevices();
+
+    public abstract  BluetoothDevice getDevice(String address);
 
     /**
      * Start scan process and call the {@link OnBluetoothScanCallback}
@@ -204,21 +250,15 @@ public abstract class BluetoothService {
 
     public interface OnBluetoothEventCallback {
         void onDataRead(byte[] buffer, int length);
-
         void onStatusChange(BluetoothStatus status);
-
         void onDeviceName(String deviceName);
-
         void onToast(String message);
-
         void onDataWrite(byte[] buffer);
     }
 
     public interface OnBluetoothScanCallback {
         void onDeviceDiscovered(BluetoothDevice device, int rssi);
-
         void onStartScan();
-
         void onStopScan();
     }
 }

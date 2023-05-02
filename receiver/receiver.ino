@@ -1,5 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <WebSocketsServer.h>
+#include <ArduinoBLE.h>
 
 #ifndef STEP_DELAY
 
@@ -46,6 +47,15 @@ int numRetries = 0;
 WebSocketsServer socket(80);
 WiFiClient client;
 
+BLEService bluetoothService("75cececa-bf0a-11ed-a712-f7b97125a3fb");
+BLEWordCharacteristic networkName("c2f0", BLERead);
+BLEWordCharacteristic networkPassword("da94", BLERead);
+BLELongCharacteristic handshake("e42f", BLERead, BLEWrite);
+
+const byte[1] manufacturerData = { 0x45 };
+
+const int TIMEOUT_BLUETOOTH_INIT = 100000;
+
 void setup() {
   Serial.begin(115200);
   while (!Serial);
@@ -53,6 +63,88 @@ void setup() {
   connect();
   for (int8_t i = 0; i < 4; i++) pinMode(rightMotorPins[i], OUTPUT);
   for (int8_t i = 0; i < 4; i++) pinMode(leftMotorPins[i], OUTPUT);
+
+  // Setup BLE
+  long start = millis();
+  while(!BLE.begin()) {
+    Serial.println("Initializing Bluetooth...");
+    if (start + TIMEOUT_BLUETOOTH_INIT < millis()) {
+      Serial.println("TIMEOUT");
+      // TODO : Restart device
+    }
+  }
+
+  BLE.setDeviceName("Jerry");
+  BLE.setLocalName("Jerry");
+  BLE.setAppearance(0x08C0); // Generic Motorized Vehicle - https://btprodspecificationrefs.blob.core.windows.net/assigned-numbers/Assigned%20Number%20Types/Assigned%20Numbers.pdf
+  BLE.setAdvertisedServiceUuid("60e00f22bf0711edbe81eb2e89a31848");
+  BLE.setManufacturerData(manufacturerData, 1);
+
+  BLE.setEventHandler(BLEConnected, onBluetoothConnect);
+  BLE.setEventHandler(BLEDisconnected, onBluetoothDisconnect);
+
+  if (!networkName.canSubscribe()) {
+    Serial.println("Cannot subscribe to network name");
+  }
+  if (!networkPassword.canSubscribe()) {
+    Serial.println("Cannot subscribe to network name");
+  }
+  if (!handshake.canSubscribe()) {
+    Serial.println("Cannot subscribe to network name");
+  }
+  
+  networkName.setEventHandler(BLEWritten | BLESubscribed | BLEUnsubscribed | BLERead, onNetworkNameEvent);
+  networkName.subscribe();
+  bluetoothService.addCharacteristic(networkName);
+  
+  networkPassword.setEventHandler(BLEWritten | BLESubscribed | BLEUnsubscribed | BLERead, onNetworkPasswordEvent);
+  networkPassword.subscribe();
+  bluetoothService.addCharacteristic(networkPassword);
+  
+  handshake.setEventHandler(BLEWritten | BLESubscribed | BLEUnsubscribed | BLERead, onHandshakeEvent);
+  handshake.subscribe();
+  bluetoothService.addCharacteristic(networkName);
+
+  BLE.addService(bluetoothService);
+
+  BLE.advertise();
+}
+
+void onNetworkNameEvent(BLEDevice device, BLEWordCharacteristic characteristic) {
+  Serial.print("Recieved network name: ");
+  Serial.println(device.address());
+  Serial.println(characteristic.valueUpdated());
+  Serial.println(characteristic.valueLength());
+  Serial.println(characteristic.valueSize());
+  Serial.println(characteristic.value());
+}
+
+void onNetworkPasswordEvent(BLEDevice device, BLEWordCharacteristic characteristic) {
+  Serial.print("Recieved network password: ");
+  Serial.println(device.address());
+  Serial.println(characteristic.valueUpdated());
+  Serial.println(characteristic.valueLength());
+  Serial.println(characteristic.valueSize());
+  Serial.println(characteristic.value());
+}
+
+void onHandshakeEvent(BLEDevice device, BLELongCharacteristic characteristic) {
+  Serial.println("Subscribed to handshake");
+  Serial.println(device.address());
+  Serial.println(characteristic.valueUpdated());
+  Serial.println(characteristic.valueLength());
+  Serial.println(characteristic.valueSize());
+  Serial.println(characteristic.value());
+}
+
+void onBluetoothConnect(BLEDevice device) {
+  Serial.print("Connected to a device: ");
+  Serial.println(device.address());
+}
+
+void onBluetoothDisconnect(BLEDevice device) {
+  Serial.print("Disconnected from device: ");
+  Serial.println(device.address());
 }
 
 void loop() {

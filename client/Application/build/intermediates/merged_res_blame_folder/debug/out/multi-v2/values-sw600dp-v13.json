@@ -1,46 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.robocat.android.rc.Application-mergeDebugResources-8:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "com.robocat.android.rc.Application-mergeDebugResources-30:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/jack/Projects/WiFi_RC/client/Application/src/main/res/values-sw600dp/template-styles.xml",
-                    "from": {
-                        "startLines": "18",
-                        "startColumns": "4",
-                        "startOffsets": "621",
-                        "endLines": "22",
-                        "endColumns": "12",
-                        "endOffsets": "861"
-                    },
-                    "to": {
-                        "startLines": "12",
-                        "startColumns": "4",
-                        "startOffsets": "747",
-                        "endLines": "16",
-                        "endColumns": "12",
-                        "endOffsets": "987"
-                    }
-                },
-                {
-                    "source": "/home/jack/Projects/WiFi_RC/client/Application/src/main/res/values-sw600dp/template-dimens.xml",
-                    "from": {
-                        "startLines": "20,21",
-                        "startColumns": "4,4",
-                        "startOffsets": "656,724",
-                        "endColumns": "67,67",
-                        "endOffsets": "719,787"
-                    },
-                    "to": {
-                        "startLines": "10,11",
-                        "startColumns": "4,4",
-                        "startOffsets": "611,679",
-                        "endColumns": "67,67",
-                        "endOffsets": "674,742"
-                    }
-                },
-                {
-                    "source": "/home/jack/.gradle/caches/transforms-3/6b4a2e82381d94828436df45404462f6/transformed/appcompat-v7-28.0.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/home/jack/.gradle/caches/transforms-3/780c8931bfe5d3b0e26a458d121ff58b/transformed/appcompat-1.6.1/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

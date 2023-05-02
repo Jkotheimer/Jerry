@@ -1,0 +1,52 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "804b1502bf4667c11f3cd3a358ccee86",
+    "entities": [
+      {
+        "tableName": "RemoteDevice",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`address` TEXT NOT NULL, `uuid` BLOB NOT NULL, `name` TEXT NOT NULL, `is_default` INTEGER NOT NULL, PRIMARY KEY(`address`))",
+        "fields": [
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uuid",
+            "columnName": "uuid",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "is_default",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "address"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '804b1502bf4667c11f3cd3a358ccee86')"
+    ]
+  }
+}

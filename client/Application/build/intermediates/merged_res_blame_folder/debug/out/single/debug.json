@@ -1,42 +1,54 @@
 [
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/layout_gatt_services_characteristics.xml.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/layout/gatt_services_characteristics.xml"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/drawable-xhdpi_ic_launcher.png.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/drawable-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/drawable-mdpi_ic_launcher.png.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/drawable-mdpi/ic_launcher.png"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/drawable-xxhdpi_ic_launcher.png.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/drawable-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/menu_gatt_services.xml.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/menu/gatt_services.xml"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/layout_actionbar_spinner.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/layout/actionbar_spinner.xml"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/menu_main.xml.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/menu/main.xml"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/layout_spinner.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/layout/spinner.xml"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/layout_actionbar_indeterminate_progress.xml.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/layout/actionbar_indeterminate_progress.xml"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/layout_device_list_item.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/layout/device_list_item.xml"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/drawable-hdpi_ic_launcher.png.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/drawable-hdpi/ic_launcher.png"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/layout_rc_properties.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/layout/rc_properties.xml"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/drawable-xxhdpi_ic_launcher.png.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/drawable-xxhdpi/ic_launcher.png"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/drawable-mdpi_ic_launcher.png.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/drawable-mdpi/ic_launcher.png"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/drawable-hdpi_tile.9.png.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/drawable-hdpi/tile.9.png"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/layout_device_list.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/layout/device_list.xml"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/layout_listitem_device.xml.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/layout/listitem_device.xml"
+        "merged": "com.robocat.android.rc.Application-merged_res-32:/layout_device_list_item.xml.flat",
+        "source": "com.robocat.android.rc.Application-main-35:/layout/device_list_item.xml"
     },
     {
-        "merged": "com.robocat.android.rc.Application-merged_res-10:/drawable-xhdpi_ic_launcher.png.flat",
-        "source": "com.robocat.android.rc.Application-main-13:/drawable-xhdpi/ic_launcher.png"
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/layout_getting_started.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/layout/getting_started.xml"
+    },
+    {
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/drawable-hdpi_tile.9.png.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/drawable-hdpi/tile.9.png"
+    },
+    {
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/drawable-hdpi_ic_launcher.png.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-merged_res-32:/menu_main.xml.flat",
+        "source": "/home/jack/.gradle/daemon/7.4/com.robocat.android.rc.Application-main-35:/menu/main.xml"
     }
 ]

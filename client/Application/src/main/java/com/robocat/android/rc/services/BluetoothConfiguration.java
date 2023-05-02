@@ -40,14 +40,6 @@ public class BluetoothConfiguration {
     private static final String TAG = BluetoothConfiguration.class.getSimpleName();
 
     /**
-     * Class reference for the {@link BluetoothService} implementation.
-     *
-     * @see BluetoothClassicService
-     * @see BluetoothLeService
-     */
-    public Class<? extends BluetoothService> bluetoothServiceClass;
-
-    /**
      * {@link android.app.Application} context reference.
      */
     public Context context;
@@ -70,7 +62,7 @@ public class BluetoothConfiguration {
     public char characterDelimiter;
 
     /**
-     * Required in {@link BluetoothClassicService}, is the UUID of the device that will connect in serial mode. <br/>
+     * Required in {@link BluetoothLEService}, is the UUID of the device that will connect in serial mode. <br/>
      * Optional in {@link BluetoothLeService}, is the UUID of the device that will be filtered in scan.
      * Set {@link null} if you want to scan all devices.
      */
