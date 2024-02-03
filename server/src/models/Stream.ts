@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export type StreamDocument = mongoose.Document & {
     url: string;
@@ -10,7 +10,7 @@ const streamSchema = new mongoose.Schema<StreamDocument>(
         url: { type: String, unique: true },
         token: String
     },
-    { timestamps: true },
+    { timestamps: true }
 );
 
 /**
@@ -31,4 +31,4 @@ streamSchema.pre("save", function save(next) {
 });
 */
 
-export const Stream = mongoose.model<StreamDocument>("Stream", streamSchema);
+export const Stream = mongoose.model<StreamDocument>('Stream', streamSchema);
