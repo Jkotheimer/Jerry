@@ -1,4 +1,12 @@
-# CAD output artifacts
+# FreeCAD artifacts
 *.stl
 *.gcode
 *.FCBak
+
+# KiCad artifacts
+eda/*-backups
+eda/gerber
+eda/*.zip
+eda/*.lck
+eda/*.bak
+eda/_autosave*
