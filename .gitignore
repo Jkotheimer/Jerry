@@ -4,9 +4,10 @@
 *.FCBak
 
 # KiCad artifacts
-eda/*-backups
-eda/gerber
-eda/*.zip
-eda/*.lck
-eda/*.bak
-eda/_autosave*
+eda/**/gerber
+eda/**/fp-info-cache
+eda/**/_autosave*
+eda/**/*-backups
+eda/**/*.zip
+eda/**/*.lck
+eda/**/*.bak
