@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "drv10964")(type "KiCad")(uri "./drv10964")(options "")(descr ""))
+)
