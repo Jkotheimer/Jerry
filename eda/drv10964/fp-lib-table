@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "drv10964")(type "KiCad")(uri "${KIPRJMOD}/drv10964.pretty")(options "")(descr ""))
+)
